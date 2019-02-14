@@ -11,10 +11,14 @@ module Backup
       tmp_path: ".tmp"
     }
 
+    GEM_NAME = /\w+/
+    CONFIG_FILE = /[\w\/\.]+/
+
     class << self
       include Utilities::Helpers
 
-      attr_reader :user, :root_path, :config_file, :data_path, :tmp_path
+      attr_reader :user, :root_path, :data_path, :tmp_path
+      attr_accessor :config_file
 
       # Loads the user's +config.rb+ and all model files.
       def load(options = {})
@@ -26,7 +30,14 @@ module Backup
 
         config = File.read(config_file)
         version = Backup::VERSION.split(".").first
-        unless config =~ /^# Backup v#{ version }\.x Configuration$/
+        models = File.join(File.dirname(config_file), "models", "*.rb")
+        if config =~ /^# Backup v#{ version }\.x Configuration\[(#{GEM_NAME})\]\[(#{CONFIG_FILE})\]$/
+          # TODO allow models folder within pointed config.rb as well
+          gem_name, self.config_file = $1, $2
+          spec = Bundler.load.specs.find{ |s| s.name == gem_name }
+          self.config_file = File.join(spec.full_gem_path, config_file)
+          config = File.read(config_file)
+        elsif !(config =~ /^# Backup v#{ version }\.x Configuration$/)
           raise Error, <<-EOS
             Invalid Configuration File
             The configuration file at '#{config_file}'
@@ -43,7 +54,7 @@ module Backup
         update(dsl._config_options)  # from config.rb
         update(options)              # command line takes precedence
 
-        Dir[File.join(File.dirname(config_file), "models", "*.rb")].each do |model|
+        Dir[models].each do |model|
           dsl.instance_eval(File.read(model), model)
         end
       end

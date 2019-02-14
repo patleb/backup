@@ -1,13 +1,14 @@
 # encoding: utf-8
+$:.push File.expand_path("../lib", __FILE__)
 
-require File.expand_path("lib/backup/version")
+require "ext_backup/version"
 
 Gem::Specification.new do |gem|
-  gem.name        = "backup"
-  gem.version     = Backup::VERSION
-  gem.authors     = "Michael van Rooijen"
-  gem.email       = "meskyanichi@gmail.com"
-  gem.homepage    = "https://github.com/backup/backup"
+  gem.name        = "ext_backup"
+  gem.version     = ExtBackup::VERSION
+  gem.authors     = ["Michael van Rooijen", "Patrice Lebel"]
+  gem.email       = ["meskyanichi@gmail.com", "patleb@users.noreply.github.com"]
+  gem.homepage    = "https://github.com/patleb/ext_backup"
   gem.license     = "MIT"
   gem.summary     = "Provides an elegant DSL in Ruby for performing backups "\
     "on UNIX-like systems."
@@ -42,7 +43,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "hipchat", "1.0.1"
   gem.add_dependency "flowdock", "0.4.0"
   gem.add_dependency "dogapi", "1.11.0"
-  gem.add_dependency "aws-sdk", "~> 2"
+  gem.add_dependency "aws-sdk-ses", "~> 1.4"
   gem.add_dependency "qiniu", "~> 6.5"
   gem.add_dependency "nokogiri", "~> 1.8", ">= 1.8.1"
 
