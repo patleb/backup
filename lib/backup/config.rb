@@ -32,7 +32,6 @@ module Backup
         version = Backup::VERSION.split(".").first
         models = File.join(File.dirname(config_file), "models", "*.rb")
         if config =~ /^# Backup v#{ version }\.x Configuration\[(#{GEM_NAME})\]\[(#{CONFIG_FILE})\]$/
-          # TODO allow models folder within pointed config.rb as well
           gem_name, self.config_file = $1, $2
           spec = Bundler.load.specs.find{ |s| s.name == gem_name }
           self.config_file = File.join(spec.full_gem_path, config_file)

@@ -6,8 +6,8 @@ require "ext_backup/version"
 Gem::Specification.new do |gem|
   gem.name        = "ext_backup"
   gem.version     = ExtBackup::VERSION
-  gem.authors     = ["Michael van Rooijen", "Patrice Lebel"]
-  gem.email       = ["meskyanichi@gmail.com", "patleb@users.noreply.github.com"]
+  gem.authors     = ["Michael van Rooijen"]
+  gem.email       = ["meskyanichi@gmail.com"]
   gem.homepage    = "https://github.com/patleb/ext_backup"
   gem.license     = "MIT"
   gem.summary     = "Provides an elegant DSL in Ruby for performing backups "\
@@ -28,24 +28,25 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.0"
 
-  gem.add_dependency "thor", "~> 0.18", ">= 0.18.1"
-  gem.add_dependency "open4", "1.3.0"
-  gem.add_dependency "fog", "~> 1.28"
-  gem.add_dependency "excon", "~> 0.44"
-  gem.add_dependency "unf", "0.1.3" # for fog/AWS
-  gem.add_dependency "dropbox-sdk", "1.6.5"
-  gem.add_dependency "net-ssh", "3.2.0"
-  gem.add_dependency "net-scp", "1.2.1"
-  gem.add_dependency "net-sftp", "2.1.2"
-  gem.add_dependency "mail", "~> 2.6", ">= 2.6.6"
-  gem.add_dependency "pagerduty", "2.0.0"
-  gem.add_dependency "twitter", "~> 5.5"
-  gem.add_dependency "hipchat", "1.0.1"
-  gem.add_dependency "flowdock", "0.4.0"
-  gem.add_dependency "dogapi", "1.11.0"
-  gem.add_dependency "aws-sdk-ses", "~> 1.4"
-  gem.add_dependency "qiniu", "~> 6.5"
-  gem.add_dependency "nokogiri", "~> 1.8", ">= 1.8.1"
+  gem.add_dependency "thor"
+  gem.add_dependency "open4"
+  gem.add_dependency "ext_fog_aws"
+  gem.add_dependency "excon"
+  gem.add_dependency "net-ssh"
+  gem.add_dependency "net-scp"
+  gem.add_dependency "net-sftp"
+  gem.add_dependency "mail"
+  gem.add_dependency "nokogiri"
+
+  gem.add_development_dependency "fog", "~> 2.0"
+  gem.add_development_dependency "dropbox-sdk", "1.6.5"
+  gem.add_development_dependency "pagerduty", "2.0.0"
+  gem.add_development_dependency "twitter", "~> 5.5"
+  gem.add_development_dependency "hipchat", "1.0.1"
+  gem.add_development_dependency "flowdock", "0.4.0"
+  gem.add_development_dependency "dogapi", "1.11.0"
+  gem.add_development_dependency "aws-sdk-ses", "~> 1.4"
+  gem.add_development_dependency "qiniu", "~> 6.5"
 
   gem.add_development_dependency "rubocop", "0.48.1"
   gem.add_development_dependency "rake"
